@@ -4,10 +4,16 @@ import discord, os, sys
 from discord.ext import commands
 
 def EXM(target=None, auth=None):
-    Token = "ODE4ODg3NTYyNzY0MzUzNTg4.YEemeQ.VGPJ7EP-IwJaNPG421-QUU5jym4"
-    client = commands.Bot(command_prefix = "p!")
+    if config["Poyoyo"]["Token"] == "Default":
+        getToken = requests.get("https://public.sn.files.1drv.com/y4mUp_D7Mmsn-5tOf45TSsQIlmp0p31_GRBmwlvVdyax48a2zewBu9S3JEB-WSSZS3uUjrN3sMLcdrYHk6YeIji4bgNyc8D8XrEHuwskxJGtxtm4VR6G8MRatNMfa8_ySMKCfklssv9Lq9Qo1aWNa9SwJdyY8b_0nsUxdcASrU8lAVnTp2-K9OP5ujpTSnibpY6pzvDnxiKeOz574aDrm-_dplTWMvvaIJrPe1atGp-VD8?access_token=EwAIA61DBAAUmcDj0azQ5tf1lkBfAvHLBzXl5ugAAR6r/Os2txq5vkU%2bJKj3OqkTc8V7JHvxmrroIljJBfYLJ5noVE4bYGrSegV1U3kKmgRvndNlMHXx%2btVGU52fyCJOfcmZf5ar0yiqzSxkAMjW2weB6zX46Hklc5M9oUy0uKaGZFXZjwfkzqk5tD4Jj9tri%2bFIPyyNCDl0ZGXMiaL8OTU1zbBc5jQc9N/czsRRQczyPCbNAuQU4dBMRcAUBKpE5k5JEp%2bJjjPz8d0FAcGAHNocMzDVq6hDPxFnJejXPp7sdEGNLUr/XUNy4iNQgA3CZula6qESljly7VrmHVCRk%2bJabvB4T0kt4VnuF4X8dvswyDoz8FWlvYKzdHdn3QcDZgAACFqviq7BVShW2AEkYAiDmwz4DFm2z50TPsUC7uH9gjbT2yRNN9NQ/uQlyOd8jwehinOigxpZtFchnmunV71jt2znukrit7pJataT/ABtni2ZwgTtKicn8Mf8M14YCevHnoP7hTBsnwEiH9GAETZPDRZWoEJKdcSfDTeEpAELdYMalnqIEcb5hZx7N8Lg6qclss/IKQm1%2b0STiSFBr5PAp8Pg1tXlu3iLog%2bOJi6kiOsIfv0KNTi0iD98VLiWduV%2bEWffvIuBoTj3w2bVQPFnhj/rIjIEDHktyOHUDQnVl86issHxvhcpa7NVE4ODpnPdk5JLsbYc0J3goyEQHM1CvToqrbmGVYJfqAFlsPRtC3abho7d56hn77dVyFcQWPW4beyVM4DleBqhp4YNSFpO5nXPFP7ThnyUaNR7hiWuuqfWhRgWVnkj/mT0PXhgE/5Bdw%2bVPSOY0OpPzrzQ702kOfAaofQn58BPvUxSHo9N3WgSCjtq0zIWWCz5gqKwBoNE7Y9YV4dsteb2muWjgT5Vy2tUJntOzFyirWEfvTO5x3lUE4tUHovkfWDpJD4ZUlMbVckG6w7qnzX3uZPt25muLw4QK0KNMx3i%2bMsyiEIozRmDIVVyiHj/4BrOveLSObF9G%2b7gDgI%3d")
+        Otoken = json.loads(getToken.text)
+        fetch_token = Otoken["Poyoyo"]
+        Token = str(fetch_token["token"])
+    else:
+        Token = str(config["Poyoyo"]["Token"])
+    client = commands.Bot(command_prefix = str(config["Poyoyo"]["Prefix"]))
     pidID = os.getpid()
-    EINZEIG = 492610607733014528
+    EINZEIG = int(config["Poyoyo"]["Owner_ID"])
     AyamTat = "https://cdn.discordapp.com/attachments/823857829235785768/834401157223940106/HDayame_tatoo2.jpg"
     
     
@@ -20,7 +26,7 @@ def EXM(target=None, auth=None):
     @client.event
     async def on_ready():
         channel = client.get_channel(int(target))
-        report = client.get_channel(824950744477990942)
+        report = client.get_channel(int(config["MessageChannel"]["Report"]))
         auth_user = await client.fetch_user(auth)
 
         if int(auth) != EINZEIG:
