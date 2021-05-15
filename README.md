@@ -1,2 +1,2 @@
 # Poyoyo
-this repo is exclusive for poyoyo only
+FAQ this repo is exclusive for poyoyo only
